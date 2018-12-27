@@ -23,7 +23,7 @@ RSpec.describe UdonService do
 
     context('current hour is 15 => tokyo : 0') do
       it 'works wo/error' do
-        allow_any_instance_of(described_class).to receive(:current_time).and_return(Time.zone.now)
+        allow(subject).to receive(:current_time).and_return(Time.zone.now)
         travel_to Time.zone.now.change(hour: 15, sec: 1)
         expect{ subject.perform! }.to raise_error UdonService::UdonTimeError
       end
