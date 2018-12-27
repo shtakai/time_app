@@ -5,6 +5,7 @@ class UdonService
 
   def perform!
     ensure_time
+    "FUCK OFF"
   end
 
   private
@@ -15,7 +16,8 @@ class UdonService
   end
 
   def current_time
-    Time.zone.now
+    # Time.zone.now
+    Time.current.in_time_zone('Tokyo')
   end
 
 end

@@ -10,18 +10,20 @@ RSpec.describe UdonService do
       expect(subject).to respond_to(:perform!)
     end
 
-    context('current hour is other than 0') do
+    context('current hour is other than 15 => tokyo : 0') do
       it 'works wo/error' do
-        (1..23).to_a.each do |hour|
-          travel_to Time.zone.now.change(hour: hour, sec: 1)
-          expect{ subject.perform! }.not_to raise_error
-        end
+        # (1..23).to_a.each do |hour|
+        #   travel_to Time.zone.now.change(hour: hour, sec: 1)
+        #   expect{ subject.perform! }.not_to raise_error
+        # end
+        travel_to Time.zone.now.change(hour: 14, sec: 1)
+        expect{ subject.perform! }.not_to raise_error
       end
     end
 
-    context('current hour is 0') do
+    context('current hour is 15 => tokyo : 0') do
       it 'works wo/error' do
-        travel_to Time.zone.now.change(hour: 0, sec: 1)
+        travel_to Time.zone.now.change(hour: 15, sec: 1)
         expect{ subject.perform! }.to raise_error UdonService::UdonTimeError
       end
     end
